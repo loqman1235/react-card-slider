@@ -1,13 +1,14 @@
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import CarouselCard from "./CarouselCard";
 import { useEffect, useRef, useState } from "react";
+import { ICarouselData } from "../data";
 
 interface CarouselProps {
-  gap?: number;
   slidesPerView?: number;
+  slides: ICarouselData[];
 }
 
-const Carousel: React.FC<CarouselProps> = ({ slidesPerView = 4 }) => {
+const Carousel: React.FC<CarouselProps> = ({ slidesPerView = 4, slides }) => {
   const carouselContainerRef = useRef<HTMLDivElement>(null);
   const [cardWidth, setCardWidth] = useState(0);
 
@@ -87,49 +88,16 @@ const Carousel: React.FC<CarouselProps> = ({ slidesPerView = 4 }) => {
         "
       >
         <div
-          className={`w-full flex items-center h-full`}
+          className={`min-w-full flex items-center h-full`}
           ref={carouselContainerRef}
         >
-          <CarouselCard
-            text="1"
-            bg="bg-red-500"
-            slidesPerView={slidesPerView}
-          />
-          <CarouselCard
-            text="2"
-            bg="bg-green-500"
-            slidesPerView={slidesPerView}
-          />
-          <CarouselCard
-            text="3"
-            bg="bg-blue-500"
-            slidesPerView={slidesPerView}
-          />
-          <CarouselCard
-            text="4"
-            bg="bg-yellow-500"
-            slidesPerView={slidesPerView}
-          />
-          <CarouselCard
-            text="5"
-            bg="bg-purple-500"
-            slidesPerView={slidesPerView}
-          />
-          <CarouselCard
-            text="6"
-            bg="bg-pink-500"
-            slidesPerView={slidesPerView}
-          />
-          <CarouselCard
-            text="7"
-            bg="bg-cyan-500"
-            slidesPerView={slidesPerView}
-          />
-          <CarouselCard
-            text="8"
-            bg="bg-violet-500"
-            slidesPerView={slidesPerView}
-          />
+          {slides.map((slide, index) => (
+            <CarouselCard
+              slidesPerView={slidesPerView}
+              key={index}
+              {...slide}
+            />
+          ))}
         </div>
       </div>
     </div>

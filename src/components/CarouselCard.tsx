@@ -1,27 +1,16 @@
-import { useEffect, useRef } from "react";
-
 interface CarouselCardProps {
-  text: string;
-  bg: string;
-  gap?: number;
+  image: string;
   slidesPerView: number;
 }
 
 const CarouselCard: React.FC<CarouselCardProps> = ({
-  text,
-  bg = "bg-red-500",
+  image,
   slidesPerView,
 }) => {
-  const carouselCardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    console.log(carouselCardRef.current?.getBoundingClientRect().width);
-  }, [carouselCardRef]);
   return (
     <div
       className={`
-        ${bg}
-        min-w-[calc(100%/${slidesPerView})] 
+       min-w-[calc(100%/${slidesPerView})] 
         h-full 
         flex 
         items-center 
@@ -33,9 +22,8 @@ const CarouselCard: React.FC<CarouselCardProps> = ({
         no-scrollbar
       
       `}
-      ref={carouselCardRef}
     >
-      <h1>{text}</h1>
+      <img src={image} alt="poster" className="w-full h-full object-cover" />
     </div>
   );
 };
